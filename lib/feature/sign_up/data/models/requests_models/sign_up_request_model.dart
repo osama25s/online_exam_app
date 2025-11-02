@@ -3,7 +3,9 @@ part 'sign_up_request_model.g.dart';
 
 @JsonSerializable()
 class SignUpRequestModel {
-  final String name;
+  final String username;
+  final String firstname;
+  final String lastname;
   final String email;
   final String phone;
   final String password;
@@ -12,7 +14,9 @@ class SignUpRequestModel {
 
 
   SignUpRequestModel({
-    required this.name,
+    required this.username,
+    required this.firstname,
+    required this.lastname,
     required this.email,
     required this.phone,
     required this.password,

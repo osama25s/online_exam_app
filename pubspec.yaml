@@ -23,7 +23,7 @@ dependencies:
   flutter_bloc: ^9.1.1
 
   # navigation
-  go_router: ^16.3.0
+  
 
   # Dependency Injection
   get_it: ^8.2.0
@@ -61,7 +61,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
     - assets/lottie/
 
 

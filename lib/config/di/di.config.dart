@@ -13,11 +13,11 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../feature/sign_up/api/api/api_service.dart' as _i979;
+import '../../feature/sign_up/api/api_service/api_service.dart' as _i979;
 import '../../feature/sign_up/api/datasources/sign_up_remote_datasources_impl.dart'
     as _i257;
 import '../../feature/sign_up/data/datasources/sign_up_remote_datasource_contract.dart'
-    as _i213;
+    as _i799;
 import '../../feature/sign_up/data/repo/repo_sign_up_impl.dart' as _i295;
 import '../../feature/sign_up/domian/repo/repo_sign_up_contract.dart' as _i33;
 import '../../feature/sign_up/domian/usecase/call_sign_up_usecase.dart'
@@ -36,11 +36,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.lazySingletonAsync<_i354.CacheHelper>(() => _i354.CacheHelper.create());
     gh.factory<_i979.ApiService>(() => _i979.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i799.SignUpRemoteDataSourceContact>(
+      () => _i257.SignUpRemoteDataSourceImpl(gh<_i979.ApiService>()),
+    );
     gh.factory<_i33.RepoSignUpContract>(
       () => _i295.RepoSignUpImpl(gh<_i979.ApiService>()),
-    );
-    gh.factory<_i213.SignUpRemoteDataSourceContact>(
-      () => _i257.SignUpRemoteDataSourceImpl(gh<_i979.ApiService>()),
     );
     gh.factory<_i1041.CallSignUpUseCase>(
       () => _i1041.CallSignUpUseCase(gh<_i33.RepoSignUpContract>()),
