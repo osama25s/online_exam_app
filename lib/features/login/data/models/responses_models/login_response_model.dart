@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:online_exam_app/features/login/domain/entities/login_entity.dart';
 import 'user_model.dart';
 
 part 'login_response_model.g.dart';
@@ -19,4 +20,8 @@ class LoginResponseModel {
       _$LoginResponseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
+
+  LoginEntity toEntity() {
+    return LoginEntity(message: message, accessToken: token);
+  }
 }
