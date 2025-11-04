@@ -21,7 +21,7 @@ import '../../features/login/data/datasources/login_datasource_contract.dart'
     as _i510;
 import '../../features/login/data/repos/login_repo_impl.dart' as _i937;
 import '../../features/login/domain/repos/login_repo_contract.dart' as _i909;
-import '../../features/login/domain/usecases/do_login_usecase.dart' as _i420;
+import '../../features/login/domain/usecases/do_login_usecase.dart' as _i197;
 import '../../features/login/presentation/view_model/cubit/login_cubit.dart'
     as _i753;
 import '../dio_module/dio_module.dart' as _i773;
@@ -51,11 +51,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i909.LoginRepoContract>(
       () => _i937.LoginRepoImpl(gh<_i510.LoginDatasourceContract>()),
     );
-    gh.factory<_i420.DoLoginUsecase>(
-      () => _i420.DoLoginUsecase(gh<_i909.LoginRepoContract>()),
+    gh.factory<_i197.DoLoginUsecase>(
+      () => _i197.DoLoginUsecase(gh<_i909.LoginRepoContract>()),
     );
     gh.factory<_i753.LoginCubit>(
-      () => _i753.LoginCubit(gh<_i420.DoLoginUsecase>(), gh<_i354.CacheHelper>()),
+      () =>
+          _i753.LoginCubit(gh<_i197.DoLoginUsecase>(), gh<_i354.CacheHelper>()),
     );
     return this;
   }
