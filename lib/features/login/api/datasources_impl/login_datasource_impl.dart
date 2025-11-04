@@ -11,27 +11,15 @@ import 'package:online_exam_app/features/login/data/models/responses_models/logi
 @Injectable(as: LoginDatasourceContract)
 class LoginDatasourceImpl implements LoginDatasourceContract {
   final ApiService _apiService;
-  final CacheHelper _cacheHelper;
 
-  LoginDatasourceImpl(this._apiService, this._cacheHelper);
+  LoginDatasourceImpl(this._apiService);
 
   @override
   Future<BaseResponse<LoginResponseModel>> login(
-    LoginRequestModel loginRequestModel, {
-    bool rememberMe = false,
-  }) async {
+    LoginRequestModel loginRequestModel,
+  ) async {
     try {
       final response = await _apiService.login(loginRequestModel);
-
-      if (rememberMe) {
-        await _cacheHelper.saveData(
-          key: CacheConstants.token,
-          value: response.token,
-        );
-      } else {
-        await _cacheHelper.remove(CacheConstants.token);
-      }
-
       return BaseResponse.success(response);
     } catch (error) {
       return BaseResponse.failure(ErrorHandler.handle(error));

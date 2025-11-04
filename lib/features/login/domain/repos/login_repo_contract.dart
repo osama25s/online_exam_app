@@ -3,8 +3,5 @@ import 'package:online_exam_app/features/login/data/models/requests_models/login
 import 'package:online_exam_app/features/login/domain/entities/login_entity.dart';
 
 abstract class LoginRepoContract {
-  Future<BaseResponse<LoginEntity>> login(
-    LoginRequestModel loginRequestModel, {
-    bool rememberMe,
-  });
+  Future<BaseResponse<LoginEntity>> login(LoginRequestModel loginRequestModel);
 }

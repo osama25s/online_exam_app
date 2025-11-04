@@ -5,7 +5,7 @@ import 'package:online_exam_app/features/login/data/models/requests_models/login
 import 'package:online_exam_app/features/login/domain/entities/login_entity.dart';
 import 'package:online_exam_app/features/login/domain/repos/login_repo_contract.dart';
 
-@LazySingleton(as: LoginRepoContract)
+@Injectable(as: LoginRepoContract)
 class LoginRepoImpl implements LoginRepoContract {
   final LoginDatasourceContract _loginDatasource;
 
@@ -13,13 +13,9 @@ class LoginRepoImpl implements LoginRepoContract {
 
   @override
   Future<BaseResponse<LoginEntity>> login(
-    LoginRequestModel loginRequestModel, {
-    bool rememberMe = false,
-  }) async {
-    final loginResponse = await _loginDatasource.login(
-      loginRequestModel,
-      rememberMe: rememberMe,
-    );
+    LoginRequestModel loginRequestModel,
+  ) async {
+    final loginResponse = await _loginDatasource.login(loginRequestModel);
 
     return loginResponse.map(
       success: (success) => BaseResponse.success(success.data.toEntity()),

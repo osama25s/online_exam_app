@@ -1,16 +1,17 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@module
+abstract class SharedPreferencesModule {
+  @preResolve
+  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+}
+
 @lazySingleton
 class CacheHelper {
-  late final SharedPreferences _prefs;
+  final SharedPreferences _prefs;
 
-  @factoryMethod
-  static Future<CacheHelper> create() async {
-    final instance = CacheHelper();
-    instance._prefs = await SharedPreferences.getInstance();
-    return instance;
-  }
+  CacheHelper(this._prefs);
 
   Future<bool> saveData({required String key, required Object value}) async {
     if (value is String) return await _prefs.setString(key, value);

@@ -4,7 +4,6 @@ import 'package:online_exam_app/features/login/data/models/responses_models/logi
 
 abstract class LoginDatasourceContract {
   Future<BaseResponse<LoginResponseModel>> login(
-    LoginRequestModel loginRequestModel, {
-    bool rememberMe,
-  });
+    LoginRequestModel loginRequestModel,
+  );
 }
