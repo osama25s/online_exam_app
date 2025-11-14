@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam_app/config/di/di.dart';
+import 'package:online_exam_app/core/constants/app_reoutes_constants.dart';
 import 'package:online_exam_app/core/constants/app_text_constants.dart';
 import 'package:online_exam_app/core/theme/app_colors.dart';
 import 'package:online_exam_app/core/theme/text_styles.dart';
@@ -49,7 +50,7 @@ class LoginScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text(AppTextConstants.loginSuccess)),
             );
-            context.go('/home');
+            context.go(AppReoutesConstants.homeScreen);
           }
         },
         builder: (context, state) {

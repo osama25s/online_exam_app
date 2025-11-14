@@ -18,4 +18,9 @@ class TextStyles {
     color: AppColors.black,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle font13Primary500Weight() => TextStyle(
+    fontSize: 13.sp,
+    color: AppColors.primary,
+    fontWeight: FontWeight.w500,
+  );
 }
