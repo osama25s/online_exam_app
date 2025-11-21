@@ -18,4 +18,19 @@ class TextStyles {
     color: AppColors.black,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle font14Black400Weight() => TextStyle(
+    fontSize: 14.sp,
+    color: AppColors.black,
+    fontWeight: FontWeight.w400,
+  );
+  static TextStyle font18Black500Weight() => TextStyle(
+    fontSize: 18.sp,
+    color: AppColors.black,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle font16Primary500Weight() => TextStyle(
+    fontSize: 16.sp,
+    color: AppColors.primary,
+    fontWeight: FontWeight.w500,
+  );
 }

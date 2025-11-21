@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
         await Future.delayed(const Duration(milliseconds: 500));
 
         if (context.mounted) {
-          context.go(AppReoutesConstants.loginScreen);
+          context.go(AppReoutesConstants.questionsScreen);
         }
       }
     });

@@ -24,4 +24,7 @@ class AppTextConstants {
       'Password must contain at least one special character';
   static const String confirmPasswordRequired = 'Please confirm your password';
   static const String passwordsDoNotMatch = 'Passwords do not match';
+  static const String question = 'Question';
+  static const String of = 'of';
+  static const String exam = 'exam';
 }

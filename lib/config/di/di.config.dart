@@ -24,6 +24,14 @@ import '../../features/login/domain/repos/login_repo_contract.dart' as _i909;
 import '../../features/login/domain/usecases/do_login_usecase.dart' as _i197;
 import '../../features/login/presentation/view_model/cubit/login_cubit.dart'
     as _i753;
+import '../../features/questions/api/api_service/api_service.dart' as _i275;
+import '../../features/questions/api/datasources_impl/questions_datasource_impl.dart'
+    as _i481;
+import '../../features/questions/data/datasources/questions_datasources_contract.dart'
+    as _i853;
+import '../../features/questions/data/repos/questions_repo_impl.dart' as _i182;
+import '../../features/questions/domain/repos/questions_repo_contract.dart'
+    as _i99;
 import '../dio_module/dio_module.dart' as _i773;
 import '../shared_preferences_module/shared_preferences_module.dart' as _i354;
 
@@ -45,8 +53,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i354.CacheHelper(gh<_i460.SharedPreferences>()),
     );
     gh.lazySingleton<_i411.ApiService>(() => _i411.ApiService(gh<_i361.Dio>()));
+    gh.lazySingleton<_i275.ApiService>(() => _i275.ApiService(gh<_i361.Dio>()));
     gh.factory<_i510.LoginDatasourceContract>(
       () => _i1072.LoginDatasourceImpl(gh<_i411.ApiService>()),
+    );
+    gh.factory<_i853.QuestionsDatasourcesContract>(
+      () => _i481.QuestionsDatasourceImpl(gh<_i275.ApiService>()),
+    );
+    gh.factory<_i99.QuestionsRepoContract>(
+      () => _i182.QuestionsRepoImpl(gh<_i853.QuestionsDatasourcesContract>()),
     );
     gh.factory<_i909.LoginRepoContract>(
       () => _i937.LoginRepoImpl(gh<_i510.LoginDatasourceContract>()),
