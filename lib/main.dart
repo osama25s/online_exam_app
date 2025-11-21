@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:online_exam_app/config/di/di.dart';
 import 'package:online_exam_app/online_exam_app.dart';
 
-void main() {
-   configureDependencies();
+void main() async {  // ← أضف async
+  WidgetsFlutterBinding.ensureInitialized();  // ← أضف ده
+  configureDependencies();
   runApp(const OnlineExamApp());
 }
