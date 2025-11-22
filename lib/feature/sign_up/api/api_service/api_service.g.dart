@@ -21,13 +21,13 @@ class _ApiService implements ApiService {
 
   @override
   Future<SignUpResponseModel> signup(
-    SignUpRequestModel sign_up_request_model,
+    SignUpRequestModel signUpRequestModel,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(sign_up_request_model.toJson());
+    _data.addAll(signUpRequestModel.toJson());
     final _options = _setStreamType<SignUpResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

@@ -1,242 +1,239 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:online_exam_app/feature/sign_up/data/models/requests_models/sign_up_request_model.dart';
+import 'package:injectable/injectable.dart';
+import 'package:online_exam_app/config/di/di.dart';
+import 'package:online_exam_app/core/app_text_form_field.dart';
+import 'package:online_exam_app/core/constants/app_text_constants.dart';
+import 'package:online_exam_app/core/widgets/spacing.dart';
+import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_event.dart';
+import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_state.dart';
 import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_cubit.dart';
 
-class SignUpScreen extends StatefulWidget {
-  static const String routname="kgfbnl";
+@injectable
+class SignUpScreen extends StatelessWidget {
+  static const String routename = "";
 
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
+  SignUpScreen({super.key});
 
-class _SignUpScreenState extends State<SignUpScreen> {
+  final SignUpCubit signUpCubit = getIt<SignUpCubit>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController passwordConfirmationController =
-      TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final usernameController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Sign Up")),
-      body: BlocConsumer<SignUpCubit, SignUpState>(
+    return BlocProvider(
+      create: (_) => signUpCubit,
+      child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
-          if (state is SignUpSuccess) {
+          final signUpState = state.signUpBaseState;
+
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+          if (signUpState.isLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Welcome ${state.response.user.username}!")),
+              const SnackBar(
+                content: Row(
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(width: 12),
+                    Text("جاري التحميل..."),
+                  ],
+                ),
+                duration: Duration(days: 1),
+              ),
             );
-          } else if (state is SignUpError) {
+          } else if (signUpState.errorMessage != null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(
+                content: Text(signUpState.errorMessage!),
+                backgroundColor: Colors.red,
+              ),
+            );
+          } else if (signUpState.data != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(AppTextConstants.successMessage),
+                backgroundColor: Colors.green,
+              ),
             );
           }
         },
+
         builder: (context, state) {
-          final isLoading = state is SignUpLoading;
+          final cubit = context.read<SignUpCubit>();
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  // Username
-                  TextFormField(
-                    controller: usernameController,
-                    decoration: const InputDecoration(
-                      labelText: "User name",
-                      hintText: "Enter your user name",
+          return Scaffold(
+            appBar: AppBar(title: const Text(AppTextConstants.signUp)),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    // Username
+                    AppTextFormField(
+                      controller: usernameController,
+                      label: AppTextConstants.username,
+                      hintText: AppTextConstants.enterUserName,
+                      validator: (v) =>
+                          v!.isEmpty ? AppTextConstants.usernameError : null,
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "User name is required";
-                      } else if (value.length < 3) {
-                        return "This user name is not valid";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 12),
 
-                  // First and last name
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: firstnameController,
-                          decoration: const InputDecoration(
-                            labelText: "First name",
-                            hintText: "Enter first name",
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Required";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextFormField(
-                          controller: lastnameController,
-                          decoration: const InputDecoration(
-                            labelText: "Last name",
-                            hintText: "Enter last name",
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Required";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
+                    verticalSpace(20),
 
-                  // Email
-                  TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      labelText: "Email",
-                      hintText: "Enter your email",
+                    // FirstName + LastName
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppTextFormField(
+                            controller: firstnameController,
+                            label: AppTextConstants.firstname,
+                            hintText: AppTextConstants.enterYourFirstName,
+                            validator: (v) => v!.isEmpty
+                                ? AppTextConstants.firstNameError
+                                : null,
+                          ),
+                        ),
+                        horizontalSpace(16),
+                        Expanded(
+                          child: AppTextFormField(
+                            controller: lastnameController,
+                            label: AppTextConstants.lastname,
+                            hintText: AppTextConstants.enterLastName,
+                            validator: (v) => v!.isEmpty
+                                ? AppTextConstants.lastnameError
+                                : null,
+                          ),
+                        ),
+                      ],
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Email is required";
-                      } else if (!value.contains("@")) {
-                        return "This email is not valid";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 12),
 
-                  // Password
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            labelText: "Password",
-                            hintText: "Enter password",
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Password is required";
-                            } else if (value.length < 6) {
-                              return "Password too short";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextFormField(
-                          controller: passwordConfirmationController,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            labelText: "Confirm password",
-                            hintText: "Confirm password",
-                          ),
-                          validator: (value) {
-                            if (value != passwordController.text) {
-                              return "Password not matched";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
+                    verticalSpace(20),
 
-                  // Phone number
-                  TextFormField(
-                    controller: phoneController,
-                    decoration: const InputDecoration(
-                      labelText: "Phone number",
-                      hintText: "Enter phone number",
+                    // Email
+                    AppTextFormField(
+                      controller: emailController,
+                      label: AppTextConstants.email,
+                      hintText: AppTextConstants.enterYourEmail,
+                      validator: (v) => v!.isEmpty
+                          ? AppTextConstants.enterYourPassword
+                          : null,
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Phone number is required";
-                      } else if (value.length < 10) {
-                        return "Invalid phone number";
-                      }
-                      return null;
-                    },
-                  ),
 
-                  const SizedBox(height: 24),
+                    verticalSpace(20),
 
-                  // Signup button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: isLoading
-                          ? null
-                          : () {
-                              if (_formKey.currentState!.validate()) {
-                                final request = SignUpRequestModel(
-                                  username: usernameController.text,
-                                  firstname: firstnameController.text,
-                                  lastname: lastnameController.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  passwordConfirmation:
-                                      passwordConfirmationController.text,
-                                  phone: phoneController.text,
-                                );
-                                context.read<SignUpCubit>().signUp(request);
-                              }
-                            },
+                    // Password + Confirm Password
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppTextFormField(
+                            controller: passwordController,
+                            label: AppTextConstants.password,
+                            hintText: AppTextConstants.enterYourPassword,
+                            validator: (v) => v!.isEmpty
+                                ? AppTextConstants.enterYourPassword
+                                : null,
+                          ),
+                        ),
+                        horizontalSpace(16),
+                        Expanded(
+                          child: AppTextFormField(
+                            controller: confirmPasswordController,
+                            label: AppTextConstants.confirmPassword,
+                            hintText: AppTextConstants.confirmPassword,
+                            validator: (v) => v!.isEmpty
+                                ? AppTextConstants.confirmPasswordError
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    verticalSpace(20),
+                    // Phone
+                    AppTextFormField(
+                      controller: phoneController,
+                      label: AppTextConstants.phone,
+                      hintText: AppTextConstants.enteryourphone,
+                      validator: (v) =>
+                          v!.isEmpty ? AppTextConstants.enteryourphone : null,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isLoading ? Colors.grey : Colors.blueAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      child: isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                              "Signup",
-                              style: TextStyle(fontSize: 18, color: Colors.white),
-                            ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already have an account? "),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to Login screen
-                        },
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        backgroundColor: Color(
+                          0xFF003DA5,
+                        ), // اللون الأزرق الغامق زي الصورة
+                        foregroundColor: Colors.white, // لون الخط أبيض
+                        minimumSize: const Size(
+                          double.infinity,
+                          55,
+                        ), // العرض كامل والارتفاع ثابت
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            30,
+                          ), // نفس الـ radius اللي في الصورة
                         ),
                       ),
-                    ],
-                  )
-                ],
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          cubit.doIntent(
+                            SubmitSignUpEvent(
+                              username: usernameController.text,
+                              firstname: firstnameController.text,
+                              lastname: lastnameController.text,
+                              email: emailController.text,
+                              phone: phoneController.text,
+                              password: passwordController.text,
+                              passwordConfirmation:
+                                  confirmPasswordController.text,
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text(
+                        AppTextConstants.textsignUpButton,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account? ",
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // TODO: Add navigation to Login screen
+                          },
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );

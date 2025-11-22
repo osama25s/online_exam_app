@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam_app/core/routing/app_router.dart';
 import 'package:online_exam_app/core/theme/app_theme.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/screen/screen.dart';
 import 'package:online_exam_app/feature/sign_up/presentation/view/screen/sign_up_screen.dart';
 
 class OnlineExamApp extends StatelessWidget {
@@ -13,16 +11,17 @@ class OnlineExamApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-
-          initialRoute: Screen.routname,
+            home: child,
+          initialRoute: SignUpScreen.routename,
           routes: {
-            Screen.routname:(context)=>Screen(),
+            SignUpScreen.routename:(context)=>SignUpScreen(),
           },
-          // routerConfig: AppRouter.router,
-          // theme: AppTheme.appTheme,
-          // debugShowCheckedModeBanner: false,
+        
+          theme: AppTheme.appTheme,
+          debugShowCheckedModeBanner: false,
         );
       },
     );
