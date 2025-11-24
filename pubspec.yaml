@@ -15,6 +15,7 @@ dependencies:
   cached_network_image: ^3.4.1
   google_nav_bar: ^5.0.7
   cupertino_icons: ^1.0.8
+  flutter_svg: ^2.2.3
 
   # Splash screen
   flutter_native_splash: ^2.4.7

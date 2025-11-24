@@ -33,4 +33,9 @@ class TextStyles {
     color: AppColors.primary,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle font24Red400Weight() => TextStyle(
+    fontSize: 24.sp,
+    color: AppColors.red,
+    fontWeight: FontWeight.w400,
+  );
 }

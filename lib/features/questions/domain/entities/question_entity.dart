@@ -6,7 +6,7 @@ class QuestionEntity {
   final List<AnswerEntity>? answers;
   final String? type;
   final String? correct;
-
+  final String? id;
   final ExamEntity? exam;
 
   QuestionEntity({
@@ -15,5 +15,6 @@ class QuestionEntity {
     this.type,
     this.correct,
     this.exam,
+    this.id,
   });
 }

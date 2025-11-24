@@ -26,5 +26,12 @@ class AppTextConstants {
   static const String passwordsDoNotMatch = 'Passwords do not match';
   static const String question = 'Question';
   static const String of = 'of';
-  static const String exam = 'exam';
+  static const String exam = 'Exam';
+  static const String next = 'Next';
+  static const String back = 'Back';
+  static const String NoQuestionsAvailable = 'No questions available';
+  static const String NoQuestionOptionsAvailable =
+      'No question options available';
+  static const String timeOut = 'Time out !!';
+  static const String viewScore = 'View Score';
 }

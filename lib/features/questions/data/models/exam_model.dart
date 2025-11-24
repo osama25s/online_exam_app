@@ -25,7 +25,11 @@ class ExamModel {
   });
 
   ExamEntity toEntity() {
-    return ExamEntity(duration: duration, numberOfQuestions: numberOfQuestions);
+    return ExamEntity(
+      duration: duration,
+      numberOfQuestions: numberOfQuestions,
+      title: title,
+    );
   }
 
   factory ExamModel.fromJson(Map<String, dynamic> json) =>

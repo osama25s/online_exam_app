@@ -8,14 +8,12 @@ class AnswerOption extends StatelessWidget {
   final String optionText;
   final bool isSelected;
   final VoidCallback onTap;
-  final String optionLabel;
 
   const AnswerOption({
     Key? key,
     required this.optionText,
     required this.isSelected,
     required this.onTap,
-    required this.optionLabel,
   }) : super(key: key);
 
   @override

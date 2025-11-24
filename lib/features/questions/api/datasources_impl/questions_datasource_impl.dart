@@ -16,7 +16,8 @@ class QuestionsDatasourceImpl implements QuestionsDatasourcesContract {
     try {
       final String token =
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZmJkMjE2OGZiMTlhZDk1NWIyMzg5NSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzYxNDI0NDAxfQ.D4azBYSwsUBEz6m3I-LZDe02OPq4-lCRyDYfhRJsUmg';
-      final response = await _apiService.getQuestions(exam, token);
+      final String examid = '670070a830a3c3c1944a9c63';
+      final response = await _apiService.getQuestions(examid, token);
       return BaseResponse.success(response);
     } on Exception catch (error) {
       return BaseResponse.failure(ErrorHandler.handle(error));

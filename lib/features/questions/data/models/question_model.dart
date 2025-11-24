@@ -35,6 +35,7 @@ class QuestionModel {
       type: type,
       correct: correct,
       exam: exam?.toEntity(),
+      id: id,
     );
   }
 

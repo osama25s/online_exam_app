@@ -32,6 +32,10 @@ import '../../features/questions/data/datasources/questions_datasources_contract
 import '../../features/questions/data/repos/questions_repo_impl.dart' as _i182;
 import '../../features/questions/domain/repos/questions_repo_contract.dart'
     as _i99;
+import '../../features/questions/domain/usecases/get_questions_usecase.dart'
+    as _i309;
+import '../../features/questions/presentation/view_model/cubit/get_questions_cubit.dart'
+    as _i771;
 import '../dio_module/dio_module.dart' as _i773;
 import '../shared_preferences_module/shared_preferences_module.dart' as _i354;
 
@@ -65,6 +69,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i909.LoginRepoContract>(
       () => _i937.LoginRepoImpl(gh<_i510.LoginDatasourceContract>()),
+    );
+    gh.factory<_i309.GetQuestionsUsecase>(
+      () => _i309.GetQuestionsUsecase(gh<_i99.QuestionsRepoContract>()),
+    );
+    gh.factory<_i771.GetQuestionsCubit>(
+      () => _i771.GetQuestionsCubit(gh<_i309.GetQuestionsUsecase>()),
     );
     gh.factory<_i197.DoLoginUsecase>(
       () => _i197.DoLoginUsecase(gh<_i909.LoginRepoContract>()),

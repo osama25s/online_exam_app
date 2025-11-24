@@ -1,17 +1,22 @@
-// exam_header_widget.dart
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam_app/core/constants/app_text_constants.dart';
 import 'package:online_exam_app/core/theme/app_colors.dart';
 import 'package:online_exam_app/core/theme/text_styles.dart';
 import 'package:online_exam_app/core/widgets/spacing.dart';
 
 class QuestionHeader extends StatefulWidget {
   final int initialMinutes;
+  final String examTiltle;
+  final VoidCallback? onTimerComplete;
 
-  const QuestionHeader({super.key, required this.initialMinutes});
+  const QuestionHeader({
+    super.key,
+    required this.initialMinutes,
+    required this.examTiltle,
+    this.onTimerComplete,
+  });
 
   @override
   State<QuestionHeader> createState() => _QuestionHeaderState();
@@ -33,6 +38,7 @@ class _QuestionHeaderState extends State<QuestionHeader> {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingSeconds == 0) {
         timer.cancel();
+        widget.onTimerComplete?.call();
       } else {
         setState(() => remainingSeconds--);
       }
@@ -57,10 +63,7 @@ class _QuestionHeaderState extends State<QuestionHeader> {
     return AppBar(
       actionsPadding: EdgeInsets.symmetric(horizontal: 16.w),
       centerTitle: true,
-      title: Text(
-        AppTextConstants.exam,
-        style: TextStyles.font18Black500Weight(),
-      ),
+      title: Text(widget.examTiltle, style: TextStyles.font18Black500Weight()),
       actions: [
         Icon(Icons.timer_outlined, size: 22.w, color: AppColors.primary),
         horizontalSpace(4.w),
