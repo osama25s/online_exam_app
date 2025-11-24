@@ -29,7 +29,7 @@ class AppValidators {
     return null;
   }
 
-  /// Optional: confirm password validation
+  /// Confirm password validation
   static String? validateConfirmPassword(
     String? value,
     String? originalPassword,
@@ -38,6 +38,16 @@ class AppValidators {
       return 'Please confirm your password';
     } else if (value != originalPassword) {
       return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  /// Validate verification code field
+  static String? validateVerificationCode(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Verification code is required';
+    } else if (value.trim().length < 4) {
+      return 'Please enter a valid verification code';
     }
     return null;
   }
