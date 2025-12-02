@@ -4,6 +4,7 @@ import 'package:online_exam_app/core/theme/app_colors.dart';
 import 'package:online_exam_app/core/theme/text_styles.dart';
 
 class AppTextFormField extends StatefulWidget {
+  final TextStyle? hintTextStyle;
   final String label;
   final String hintText;
   final TextEditingController? controller;
@@ -38,6 +39,7 @@ class AppTextFormField extends StatefulWidget {
     this.initialValue,
     this.contentPadding,
     this.errorText,
+    this.hintTextStyle,
   }) : super(key: key);
 
   @override
@@ -104,7 +106,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.hintText,
-        hintStyle: TextStyles.font16Grey400Weight(),
+        hintStyle:widget.hintTextStyle?? TextStyles.font16Grey400Weight(),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon,
         contentPadding:

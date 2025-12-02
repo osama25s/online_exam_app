@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/config/di/di.dart';
-import 'package:online_exam_app/core/app_text_form_field.dart';
+
 import 'package:online_exam_app/core/constants/app_text_constants.dart';
+import 'package:online_exam_app/core/widgets/app_text_form_field.dart';
 import 'package:online_exam_app/core/widgets/spacing.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_event.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_state.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_cubit.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_event.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_state.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_cubit.dart';
 
 @injectable
 class SignUpScreen extends StatelessWidget {
@@ -91,26 +92,23 @@ class SignUpScreen extends StatelessWidget {
                     // FirstName + LastName
                     Row(
                       children: [
-                        Expanded(
-                          child: AppTextFormField(
-                            controller: firstnameController,
-                            label: AppTextConstants.firstname,
-                            hintText: AppTextConstants.enterYourFirstName,
-                            validator: (v) => v!.isEmpty
-                                ? AppTextConstants.firstNameError
-                                : null,
-                          ),
+                        AppTextFormField(
+                          controller: firstnameController,
+                          label: AppTextConstants.firstname,
+                          hintText: AppTextConstants.enterYourFirstName,
+                          hintTextStyle: TextStyle(fontSize: 8),
+                          validator: (v) => v!.isEmpty
+                              ? AppTextConstants.firstNameError
+                              : null,
                         ),
                         horizontalSpace(16),
-                        Expanded(
-                          child: AppTextFormField(
-                            controller: lastnameController,
-                            label: AppTextConstants.lastname,
-                            hintText: AppTextConstants.enterLastName,
-                            validator: (v) => v!.isEmpty
-                                ? AppTextConstants.lastnameError
-                                : null,
-                          ),
+                        AppTextFormField(
+                          controller: lastnameController,
+                          label: AppTextConstants.lastname,
+                          hintText: AppTextConstants.enterLastName,
+                          validator: (v) => v!.isEmpty
+                              ? AppTextConstants.lastnameError
+                              : null,
                         ),
                       ],
                     ),

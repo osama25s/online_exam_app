@@ -14,28 +14,16 @@ class TextStyles {
   );
   static TextStyle font16Grey400Weight() => TextStyle(
     fontSize: 16.sp,
-    color: AppColors.grey,
-  static TextStyle font20Black500Weight() => TextStyle(
-    fontSize: 20.sp,
-    color: AppColors.black,
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle font16Grey400Weight() => TextStyle(
-    fontSize: 16.sp,
-    color: AppColors.grey,
-    fontWeight: FontWeight.w400,
-  );
+    color: AppColors.grey,);
+ 
+
   static TextStyle font16Black500Weight() => TextStyle(
     fontSize: 16.sp,
     color: AppColors.black,
     fontWeight: FontWeight.w500,
   );
-}
-  static TextStyle font16Black500Weight() => TextStyle(
-    fontSize: 16.sp,
-    color: AppColors.black,
-    fontWeight: FontWeight.w500,
-  );
+
+ 
   static TextStyle font13Primary500Weight() => TextStyle(
     fontSize: 13.sp,
     color: AppColors.primary,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/theme/app_theme.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/screen/sign_up_screen.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/screen/sign_up_screen.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
