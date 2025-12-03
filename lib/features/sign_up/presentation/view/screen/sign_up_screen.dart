@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/config/di/di.dart';
-import 'package:online_exam_app/core/app_text_form_field.dart';
 import 'package:online_exam_app/core/constants/app_text_constants.dart';
+import 'package:online_exam_app/core/widgets/app_text_form_field.dart';
 import 'package:online_exam_app/core/widgets/spacing.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_event.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_state.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_cubit.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_event.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_state.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_cubit.dart';
 
 @injectable
 class SignUpScreen extends StatelessWidget {

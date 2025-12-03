@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/config/base_response/base_response.dart';
 import 'package:online_exam_app/config/base_state/base_state.dart';
-import 'package:online_exam_app/feature/sign_up/data/models/responses_models/sign_up_response_model.dart';
-import 'package:online_exam_app/feature/sign_up/domian/usecase/do_sign_up_usecase.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_event.dart';
-import 'package:online_exam_app/feature/sign_up/presentation/view/view_model/sign_up_state.dart';
-import 'package:online_exam_app/feature/sign_up/data/models/requests_models/sign_up_request_model.dart';
+import 'package:online_exam_app/features/sign_up/data/models/responses_models/sign_up_response_model.dart';
+import 'package:online_exam_app/features/sign_up/domian/usecase/do_sign_up_usecase.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_event.dart';
+import 'package:online_exam_app/features/sign_up/presentation/view/view_model/sign_up_state.dart';
+import 'package:online_exam_app/features/sign_up/data/models/requests_models/sign_up_request_model.dart';
 @injectable
 class SignUpCubit extends Cubit<SignUpState> {
   final DoSignUpUsecase _doSignUpUsecase;
