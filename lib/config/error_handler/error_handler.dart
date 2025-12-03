@@ -153,25 +153,28 @@ ApiErrorModel _handleError(DioException error) {
 
     case DioExceptionType.badResponse:
       if (error.response != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
+        try {
+          return ApiErrorModel.fromJson(error.response!.data);
+        } catch (_) {
+          return DataSource.DEFAULT.getFailure();
+        }
       } else {
         return DataSource.DEFAULT.getFailure();
       }
+
+    case DioExceptionType.connectionError:
+      return DataSource.NO_INTERNET_CONNECTION.getFailure();
 
     case DioExceptionType.unknown:
       if (error.message != null &&
           error.message!.toLowerCase().contains('socketexception')) {
         return DataSource.NO_INTERNET_CONNECTION.getFailure();
-      } else if (error.response != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
-      } else {
-        return DataSource.DEFAULT.getFailure();
       }
+      return DataSource.DEFAULT.getFailure();
 
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
 
-    case DioExceptionType.connectionError:
     case DioExceptionType.badCertificate:
       return DataSource.DEFAULT.getFailure();
   }
