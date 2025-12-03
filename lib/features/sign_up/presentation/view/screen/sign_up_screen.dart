@@ -43,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(width: 12),
-                    Text("جاري التحميل..."),
+                    Text(AppTextConstants.Loading),
                   ],
                 ),
                 duration: Duration(days: 1),
@@ -96,6 +96,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: firstnameController,
                             label: AppTextConstants.firstname,
                             hintText: AppTextConstants.enterYourFirstName,
+                            // hintTextStyle: TextStyle(fontSize: 11),
                             validator: (v) => v!.isEmpty
                                 ? AppTextConstants.firstNameError
                                 : null,
