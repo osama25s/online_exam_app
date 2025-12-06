@@ -2,8 +2,8 @@ class AppTextConstants {
   static const String loginText = 'Login';
   static const String password = 'Password';
   static const String email = 'Email';
-  static const String enterYourEmail = 'Enter your email';
-  static const String enterYourPassword = 'Enter your password';
+  static const String enterYourEmail = 'Enter email';
+  static const String enterYourPassword = 'Enter password';
   static const String forgetPassword = 'Forget Password?';
   static const String rememberMe = 'Remember me';
   static const String signUp = 'Sign Up';
@@ -27,4 +27,25 @@ class AppTextConstants {
   static const String explore = 'Explore';
   static const String result = 'Result';
   static const String profile = 'Profile';
+  static const String phone = "Phone";
+  static const String username = "Username";
+  static const String enterUserName = "Enter User Name";
+  static const String confirmPassword = "confirm Password";
+  static const String confirmPasswordError =
+      "confirm Password is not required ";
+  static const String firstname = "first Name";
+
+  static const String enterFirstName = "Enter First Name";
+  static const String lastname = "Last Name";
+
+  static const String enterLastName = "Enter Last Name";
+  static const String enterYourLastName = "enterYourLastName";
+  static const String firstNameError = "firstnameError";
+  static const String lastnameError = "lastnameError";
+  static const String usernameError = "Enter your user name";
+  static const String enteryourphone = "Enter phone";
+  static const String textsignUpButton = "Signup";
+  static const String enterYourFirstName = "Enter First Name";
+  static const String successMessage = "Sign up is success";
+  static const String Loading="Loading......";
 }

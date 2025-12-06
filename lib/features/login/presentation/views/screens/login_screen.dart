@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text(AppTextConstants.loginSuccess)),
             );
-            context.go(AppReoutesConstants.homeScreen);
+            context.go(AppRoutesConstants.homeScreen);
           }
         },
         builder: (context, state) {
